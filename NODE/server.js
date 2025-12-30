@@ -6,6 +6,8 @@ import {PORT, SECRET_JWT_KEY} from './config.js'
 import { UserRepository } from './user-repository.js';
 import jwt from 'jsonwebtoken'
 import cookieParser from 'cookie-parser';
+import cors from 'cors';
+
 
 const app = express();
 app.use(express.json());
@@ -13,6 +15,11 @@ app.use(cookieParser())
 app.use(express.static("public")); // Càrrega CSS i altres fitxers públics
 app.use(express.urlencoded({ extended: true }));
 app.use(methodOverride('_method'));
+
+app.use(cors({
+    origin: 'http://localhost:5173',
+    credentials: true
+}))
 
 app.set('view engine', 'ejs'); // Motor de plantilles
 app.set('views', './views'); // Ubicació de les plantilles
