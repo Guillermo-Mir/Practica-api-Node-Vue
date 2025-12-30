@@ -1,17 +1,14 @@
 <script setup>
 import Home from './views/Home.vue';
-import Pokemons from './views/Pokemons.vue'
+import Pokemons from './views/editarPokemon.vue'
 
 
 </script>
 
 <template>
-  <h1>ProductList</h1>
   <div>
     <nav>
-      <RouterLink to="/">Home</RouterLink><br>
-      <RouterLink to="/pokemons">Pokemons</RouterLink><br>
-      <RouterLink to="/videojocs">Videojocs</RouterLink>
+      <RouterLink to="/"></RouterLink><br>
     </nav>
     <RouterView/>
     <hr />

@@ -10,11 +10,6 @@ const router = createRouter({
       component: () => import('@/views/Home.vue')
     },
     {
-      path: "/pokemons", 
-      name: "Pokemons", 
-      component: () => import('@/views/Pokemons.vue')
-    },
-    {
       path: "/editarPokemon/:id", 
       name: "editarPokemon", 
       component: () => import('@/views/editarPokemon.vue')
