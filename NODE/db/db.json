@@ -1,0 +1,42 @@
+{
+    "pokemons": [
+        {
+            "id": 1,
+            "name": "Bulbasaur",
+            "type": "Planta/Veneno",
+            "generation": 1
+        },
+        {
+            "id": 2,
+            "name": "Charmander",
+            "type": "Fuego",
+            "generation": "1"
+        },
+        {
+            "id": 3,
+            "name": "Squirtle",
+            "type": "Agua",
+            "generation": 1
+        }
+    ],
+    "videogames": [
+        {
+            "id": 1,
+            "name": "Outer Wilds",
+            "type": "Aventura / Exploración",
+            "creator": "Mobius Digital"
+        },
+        {
+            "id": 2,
+            "name": "Death Stranding 2",
+            "type": "Acción / Aventura",
+            "creator": "Kojima Productions"
+        },
+        {
+            "id": 3,
+            "name": "Cyberpunk 2077",
+            "type": "RPG / Mundo abierto",
+            "creator": "CD Projekt Red"
+        }
+    ]
+}
