@@ -1,3 +1,4 @@
+
 import express from 'express';
 import fs from 'fs';
 
@@ -11,7 +12,8 @@ router.get('/', (req, res) => {
     const data = readData();
     const user = { name: "Guillermo" };
     const htmlMessage = `<a href="/">Home</a>`;
-    res.render("pokemon", { user, data, htmlMessage });//hay que modificar todos los renders
+    //res.render("pokemon", { user, data, htmlMessage });//hay que modificar todos los renders
+    res.json({pokemons: data.pokemons})
 });
 
 
@@ -22,9 +24,9 @@ router.get('/edit_pokemon/:id', (req, res) => {
     const data = readData();
     const pokemon = data.pokemons.find(p => p.id === parseInt(req.params.id));
 
-    if (!pokemon) return res.status(404).send('Pokemon not found');
-
-    res.render("edit_pokemon", { user, pokemon, htmlMessage });
+    if (!pokemon) return res.status(404).send('Pokemon not found'); 
+    //res.render("edit_pokemon", { user, pokemon, htmlMessage });
+    res.json({pokemon})
 });
 
 router.get('/create', (req, res) => {
@@ -38,7 +40,8 @@ router.get('/:id', (req, res) => {
     const id = parseInt(req.params.id);
     const pokemon = data.pokemons.find(pokemon => pokemon.id === id);
     if (!pokemon) return res.status(404).send('Pokemon not found');
-    res.render("detall_pokemon", { user, pokemon, htmlMessage });
+    //res.render("detall_pokemon", { user, pokemon, htmlMessage });
+    res.json({pokemon})
 });
 
 
