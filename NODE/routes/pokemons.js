@@ -7,17 +7,13 @@ const readData = () => JSON.parse(fs.readFileSync('./db/db.json'));
 const writeData = (data) =>
   fs.writeFileSync('./db/db.json', JSON.stringify(data, null, 2));
 
-/**
- * GET → Obtener todos los pokemons
- */
+
 router.get('/', (req, res) => {
   const data = readData();
   res.json({ pokemons: data.pokemons });
 });
 
-/**
- * GET → Obtener un pokemon por ID
- */
+
 router.get('/:id', (req, res) => {
   const data = readData();
   const id = parseInt(req.params.id);
@@ -30,9 +26,7 @@ router.get('/:id', (req, res) => {
   res.json({ pokemon });
 });
 
-/**
- * POST → Crear un nuevo pokemon
- */
+
 router.post('/', (req, res) => {
   const data = readData();
   const { name, type, generation } = req.body;
@@ -56,9 +50,6 @@ router.post('/', (req, res) => {
   res.status(201).json({ pokemon: newPokemon });
 });
 
-/**
- * PUT → Actualizar un pokemon
- */
 router.put('/:id', (req, res) => {
   const data = readData();
   const id = parseInt(req.params.id);
@@ -74,9 +65,7 @@ router.put('/:id', (req, res) => {
   res.json({ pokemon: data.pokemons[index] });
 });
 
-/**
- * DELETE → Eliminar un pokemon
- */
+
 router.delete('/:id', (req, res) => {
   const data = readData();
   const id = parseInt(req.params.id);

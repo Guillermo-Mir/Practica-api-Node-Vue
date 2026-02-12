@@ -98,3 +98,9 @@ app.get('/protected',(req,res)=>{
 app.listen(PORT,()=>{
     console.log(`Server running on port${PORT}`);
 });
+
+app.get('/me', (req, res) => {
+    const { user } = req.session
+    if (!user) return res.status(401).json({ authenticated: false })
+    res.json({ authenticated: true, user })
+})

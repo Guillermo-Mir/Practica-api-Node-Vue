@@ -1,26 +1,62 @@
 import { createRouter, createWebHistory } from 'vue-router'
-import App from '@/App.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
   routes: [
     {
+      path: "/login",
+      name: "login",
+      component: () => import('@/views/login.vue')
+    },
+    {
+      path: "/register",
+      name: "register",
+      component: () => import('@/views/register.vue')
+    },
+    {
       path: "/",
       name: "home",
-      component: () => import('@/views/Home.vue')
+      component: () => import('@/views/Home.vue'),
+      meta: { requiresAuth: true }
     },
     {
-      path: "/editarPokemon/:id", 
-      name: "editarPokemon", 
-      component: () => import('@/views/editarPokemon.vue')
+      path: "/editarPokemon/:id",
+      name: "editarPokemon",
+      component: () => import('@/views/editarPokemon.vue'),
+      meta: { requiresAuth: true }
     },
     {
-      path: "/afegirPokemon/", 
-      name: "afegirPokemon", 
-      component: () => import('@/views/afegirPokemon.vue')
-    },
-
+      path: "/afegirPokemon/",
+      name: "afegirPokemon",
+      component: () => import('@/views/afegirPokemon.vue'),
+      meta: { requiresAuth: true }
+    }
   ],
+})
+
+/* 🔐 PROTECCIÓN GLOBAL */
+router.beforeEach(async (to, from, next) => {
+
+  if (!to.meta.requiresAuth) return next()
+
+  try {
+    const res = await fetch("http://localhost:3000/me", {
+      credentials: "include"
+    })
+
+    if (!res.ok) return next("/login")
+
+    const data = await res.json()
+
+    if (data.authenticated) {
+      next()
+    } else {
+      next("/login")
+    }
+
+  } catch (error) {
+    next("/login")
+  }
 })
 
 export default router

@@ -2,8 +2,9 @@
 import { ref, onMounted } from 'vue';
 import { useFetch } from '@/composable/useFetch.js';
 import PokemonCard from '@/component/PokemonCard.vue';
-import { RouterLink } from 'vue-router';
+import { useRouter } from 'vue-router';
 
+const router = useRouter();
 const url = ref(`http://localhost:3000/pokemons`);
 const { data, error, loading, fetchData } = useFetch(url);
 
@@ -16,6 +17,15 @@ function deletePokemon(id) {
   });
 }
 
+// Logout
+async function logout() {
+  await fetch('http://localhost:3000/logout', {
+    method: 'POST',
+    credentials: 'include'
+  });
+  router.push('/login');
+}
+
 // Para cargar datos inicialmente
 onMounted(fetchData);
 </script>
@@ -25,6 +35,7 @@ onMounted(fetchData);
     <header class="main-header">
       <h1>Llistat de Pokemons</h1>
       <RouterLink to="/afegirPokemon" class="home-link">Afegir un Pokemon</RouterLink>
+      <button class="logout-button" @click="logout">Sortir / Login</button>
     </header>
 
     <main class="content">
@@ -33,7 +44,12 @@ onMounted(fetchData);
       <div v-else>
         <div v-if="data && data.pokemons && data.pokemons.length">
           <div class="grid">
-            <PokemonCard v-for="pokemon in data.pokemons" :key="pokemon.id" :pokemon="pokemon" @deletepokemon="deletePokemon"/>
+            <PokemonCard 
+              v-for="pokemon in data.pokemons" 
+              :key="pokemon.id" 
+              :pokemon="pokemon" 
+              @deletepokemon="deletePokemon"
+            />
           </div>
         </div>
         <div v-else class="status">
@@ -57,6 +73,7 @@ onMounted(fetchData);
   padding: 40px 20px;
   text-align: center;
   border-radius: 0 0 20px 20px;
+  position: relative;
 }
 
 .home-link {
@@ -66,21 +83,28 @@ onMounted(fetchData);
   margin-top: 10px;
 }
 
+.logout-button {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  padding: 10px 15px;
+  border-radius: 8px;
+  border: none;
+  background: white;
+  color: #4facfe;
+  font-weight: bold;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.logout-button:hover {
+  opacity: 0.9;
+}
+
 .content {
   max-width: 1200px;
   margin: 0 auto;
   padding: 20px;
-}
-
-.section-title h2 {
-  color: #444;
-  margin-bottom: 5px;
-}
-
-.add-link {
-  color: #4facfe;
-  text-decoration: none;
-  font-size: 0.9rem;
 }
 
 .grid {
