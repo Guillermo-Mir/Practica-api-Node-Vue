@@ -34,13 +34,12 @@ const router = createRouter({
   ],
 })
 
-/* 🔐 PROTECCIÓN GLOBAL */
 router.beforeEach(async (to, from, next) => {
 
   if (!to.meta.requiresAuth) return next()
 
   try {
-    const res = await fetch("http://localhost:3000/me", {
+    const res = await fetch("http://localhost:3000/protected", {
       credentials: "include"
     })
 

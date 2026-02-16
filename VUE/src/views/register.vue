@@ -39,7 +39,7 @@ const register = async () => {
   })
 
   if (res.ok) {
-    alert("Usuario creado correctamente")
+    alert("Usuari creat correctament")
     router.push("/login")
   } else {
     alert("Error al registrar")
