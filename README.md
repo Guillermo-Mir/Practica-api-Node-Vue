@@ -20,7 +20,7 @@ Aquest projecte està compost per dues parts principals:
 
 | Endpoint         | Mètode | Descripció |
 |-----------------|--------|------------|
-| `/login`        | POST   | Autentica un usuari i genera un JWT guardat en cookie httpOnly amb expiració d’1 hora. |
+| `/login`        | POST   | Autentica un usuari i genera un JWT. |
 | `/register`     | POST   | Registra un usuari nou i el desa a `user.json`. |
 | `/logout`       | POST   | Esborra la cookie JWT i finalitza la sessió. |
 | `/protected`    | GET    | Endpoint protegit que retorna JSON amb `{ authenticated: true, user }` si la sessió és vàlida. |
